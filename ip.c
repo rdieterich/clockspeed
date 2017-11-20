@@ -2,9 +2,7 @@
 #include "scan.h"
 #include "ip.h"
 
-unsigned int ip_fmt(s,ip)
-char *s;
-struct ip_address *ip;
+unsigned int ip_fmt(char *s, struct ip_address *ip)
 {
   unsigned int len;
   unsigned int i;
@@ -20,9 +18,7 @@ struct ip_address *ip;
   return len;
 }
 
-unsigned int ip_scan(s,ip)
-char *s;
-struct ip_address *ip;
+unsigned int ip_scan(char *s, struct ip_address *ip)
 {
   unsigned int i;
   unsigned int len;
@@ -39,9 +35,7 @@ struct ip_address *ip;
   return len;
 }
 
-unsigned int ip_scanbracket(s,ip)
-char *s;
-struct ip_address *ip;
+unsigned int ip_scanbracket(char *s, struct ip_address *ip)
 {
   unsigned int len;
  

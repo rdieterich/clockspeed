@@ -27,8 +27,7 @@ struct point {
   int flagknown;
 } ;
 
-void now(p)
-struct point *p;
+void now(struct point *p)
 {
   timing_now(&p->lowlevel);
   timing_basic_now(&p->ostime);
@@ -36,8 +35,7 @@ struct point *p;
   p->flagknown = 0;
 }
 
-double nano(buf)
-unsigned char buf[16];
+double nano(unsigned char buf[16])
 {
   unsigned long u;
   double result;
@@ -122,7 +120,7 @@ void savederiv()
   rename("etc/atto.tmp","etc/atto"); /* if it fails, bummer */
 }
 
-void main()
+void main(int argc, char *argv)
 {
   struct timeval tvselect;
   fd_set rfds;

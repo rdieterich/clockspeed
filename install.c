@@ -11,11 +11,7 @@ extern void hier();
 
 int fdsourcedir = -1;
 
-void h(home,uid,gid,mode)
-char *home;
-int uid;
-int gid;
-int mode;
+void h(char *home, int uid, int gid, int mode)
 {
   if (mkdir(home,0700) == -1)
     if (errno != error_exist)
@@ -26,12 +22,7 @@ int mode;
     strerr_die4sys(111,FATAL,"unable to chmod ",home,": ");
 }
 
-void d(home,subdir,uid,gid,mode)
-char *home;
-char *subdir;
-int uid;
-int gid;
-int mode;
+void d(char *home, char *subdir, int uid, int gid, int mode)
 {
   if (chdir(home) == -1)
     strerr_die4sys(111,FATAL,"unable to switch to ",home,": ");
@@ -49,13 +40,7 @@ char outbuf[SUBSTDIO_OUTSIZE];
 substdio ssin;
 substdio ssout;
 
-void c(home,subdir,file,uid,gid,mode)
-char *home;
-char *subdir;
-char *file;
-int uid;
-int gid;
-int mode;
+void c(char *home, char *subdir, char *file, int uid, int gid, int mode)
 {
   int fdin;
   int fdout;
@@ -99,14 +84,7 @@ int mode;
     strerr_die6sys(111,FATAL,"unable to chmod .../",subdir,"/",file,": ");
 }
 
-void z(home,subdir,file,len,uid,gid,mode)
-char *home;
-char *subdir;
-char *file;
-int len;
-int uid;
-int gid;
-int mode;
+void z(char *home, char *subdir, char *file, int len, int uid, int gid, int mode)
 {
   int fdout;
 
@@ -137,7 +115,7 @@ int mode;
     strerr_die6sys(111,FATAL,"unable to chmod .../",subdir,"/",file,": ");
 }
 
-void main()
+void main(int argc, char **argv)
 {
   fdsourcedir = open_read(".");
   if (fdsourcedir == -1)

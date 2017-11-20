@@ -51,9 +51,7 @@ struct taia temp2;
 
 unsigned char adj[16];
 
-void main(argc,argv)
-int argc;
-char **argv;
+void main(int argc, char **argv)
 {
   struct timeval tvselect;
   fd_set rfds;

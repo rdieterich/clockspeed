@@ -19,10 +19,7 @@
 /* TAI64 baseline is 1970-01-01 00:00:00 = 4000000000000000 TAI64 */
 /* NTP epoch is 1900-01-01 00:00:10 = 3fffffff7c55818a TAI64 */
 
-void ntp_taia(ntp,ta,flagleap)
-unsigned char *ntp;
-struct taia *ta;
-int flagleap;
+void ntp_taia(unsigned char *ntp, struct taia *ta, int flagleap)
 {
   unsigned char buf[16];
   struct tai t;
@@ -117,9 +114,7 @@ struct taia temp2;
 
 unsigned char adj[16];
 
-void main(argc,argv)
-int argc;
-char **argv;
+void main(int argc, char **argv)
 {
   struct timeval tvselect;
   fd_set rfds;

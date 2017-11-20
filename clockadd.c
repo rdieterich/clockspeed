@@ -11,7 +11,7 @@
 unsigned char buf[16];
 struct timeval tv;
 
-void main()
+void main(int argc, char **argv)
 {
   unsigned long u;
   unsigned long v;
