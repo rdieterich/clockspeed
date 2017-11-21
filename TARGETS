@@ -64,7 +64,6 @@ auto-str
 auto_home.c
 auto_home.o
 hasmkffo.h
-fifo.o
 open_read.o
 open_trunc.o
 open_write.o

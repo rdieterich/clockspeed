@@ -64,9 +64,9 @@ compile clockadd.c substdio.h readwrite.h strerr.h exit.h select.h
 	./compile clockadd.c
 
 clockspeed: \
-load clockspeed.o auto_home.o fifo.o open.a error.a str.a fs.a
-	./load clockspeed auto_home.o fifo.o open.a error.a str.a \
-	fs.a 
+load clockspeed.o auto_home.o open.a error.a str.a fs.a
+	./load clockspeed auto_home.o open.a error.a str.a \
+	fs.a
 
 clockspeed.0: \
 clockspeed.1
@@ -74,7 +74,7 @@ clockspeed.1
 
 clockspeed.o: \
 compile clockspeed.c readwrite.h exit.h select.h scan.h fmt.h str.h \
-fifo.h open.h error.h auto_home.h timing.h hasrdtsc.h hasgethr.h
+open.h error.h auto_home.h timing.h hasrdtsc.h hasgethr.h
 	./compile clockspeed.c
 
 clockview: \
@@ -106,10 +106,6 @@ compile error.c error.h
 error_str.o: \
 compile error_str.c error.h
 	./compile error_str.c
-
-fifo.o: \
-compile fifo.c hasmkffo.h fifo.h
-	./compile fifo.c
 
 find-systype: \
 find-systype.sh auto-ccld.sh
@@ -143,13 +139,6 @@ trygethr.c compile load
 	2>&1 \
 	&& echo \#define HASGETHRTIME 1 || exit 0 ) > hasgethr.h
 	rm -f trygethr.o
-
-hasmkffo.h: \
-trymkffo.c compile load
-	( ( ./compile trymkffo.c && ./load trymkffo ) >/dev/null \
-	2>&1 \
-	&& echo \#define HASMKFIFO 1 || exit 0 ) > hasmkffo.h
-	rm -f trymkffo.o trymkffo
 
 hasrdtsc.h: \
 tryrdtsc.c compile load
@@ -281,8 +270,8 @@ byte_copy.c byte_cr.c byte_zero.c str.h str_diff.c str_len.c strerr.h \
 strerr_sys.c strerr_die.c substdio.h substdio.c substdi.c substdo.c \
 substdio_copy.c subfd.h subfderr.c readwrite.h exit.h error.h error.c \
 error_str.c ip.h ip.c fmt.h fmt_str.c fmt_uint.c fmt_uint0.c \
-fmt_ulong.c scan.h scan_ulong.c select.h1 select.h2 trysysel.c fifo.h \
-fifo.c trymkffo.c open.h open_read.c open_trunc.c open_write.c \
+fmt_ulong.c scan.h scan_ulong.c select.h1 select.h2 trysysel.c \
+trymkffo.c open.h open_read.c open_trunc.c open_write.c \
 auto-str.c install.c instcheck.c trylsock.c leapsecs.dat leapsecs.3 \
 leapsecs.h leapsecs_add.c leapsecs_init.c leapsecs_read.c tai.3 \
 tai_pack.3 tai.h tai_pack.c tai_unpack.c taia.3 taia_now.3 \

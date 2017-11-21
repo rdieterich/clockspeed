@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/time.h>
 #include "readwrite.h"
 #include "exit.h"
@@ -6,7 +7,6 @@
 #include "scan.h"
 #include "fmt.h"
 #include "str.h"
-#include "fifo.h"
 #include "open.h"
 #include "error.h"
 #include "auto_home.h"
@@ -141,7 +141,11 @@ void main(int argc, char *argv)
     close(0);
   }
 
-  if (fifo_make("adjust",0600) == -1) if (errno != error_exist) _exit(1);
+  if (mkfifo("adjust", 0600) == -1) {
+    if (errno != error_exist) {
+      _exit(1);
+    }
+  }
   if (open_read("adjust") != 0) _exit(1);
   if (open_write("adjust") == -1) _exit(1);
 
