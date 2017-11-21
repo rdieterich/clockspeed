@@ -20,10 +20,10 @@ static int allwrite(int (*op)(), int fd, char *buf, int len)
   return 0;
 }
 
-int substdio_flush(ssubstdio *)
+int substdio_flush(substdio *s)
 {
   int p;
- 
+
   p = s->p;
   if (!p) return 0;
   s->p = 0;
