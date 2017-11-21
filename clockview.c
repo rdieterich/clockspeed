@@ -1,5 +1,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 #include "substdio.h"
 #include "strerr.h"
@@ -42,7 +43,7 @@ void print()
 unsigned char buf[16];
 struct timeval tv;
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   unsigned long u;
 
@@ -92,4 +93,5 @@ void main(int argc, char **argv)
   print();
 
   _exit(0);
+  return 0;
 }
