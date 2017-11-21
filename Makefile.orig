@@ -266,7 +266,7 @@ substdio_copy.c subfd.h subfderr.c readwrite.h exit.h error.h error.c \
 error_str.c ip.h ip.c fmt.h fmt_str.c fmt_uint.c fmt_uint0.c \
 fmt_ulong.c scan.h scan_ulong.c \
 trymkffo.c open.h open_read.c open_trunc.c open_write.c \
-auto-str.c install.c instcheck.c trylsock.c leapsecs.dat leapsecs.3 \
+auto-str.c install.c instcheck.c leapsecs.dat leapsecs.3 \
 leapsecs.h leapsecs_add.c leapsecs_init.c leapsecs_read.c tai.3 \
 tai_pack.3 tai.h tai_pack.c tai_unpack.c taia.3 taia_now.3 \
 taia_pack.3 taia.h taia_add.c taia_half.c taia_less.c taia_now.c \
@@ -276,10 +276,9 @@ timing.h tryrdtsc.c trygethr.c
 	chmod 400 shar
 
 sntpclock: \
-load sntpclock.o ip.o libtai.a strerr.a substdio.a error.a str.a fs.a \
-socket.lib
+load sntpclock.o ip.o libtai.a strerr.a substdio.a error.a str.a fs.a
 	./load sntpclock ip.o libtai.a strerr.a substdio.a error.a \
-	str.a fs.a  `cat socket.lib`
+	str.a fs.a
 
 sntpclock.0: \
 sntpclock.1
@@ -289,13 +288,6 @@ sntpclock.o: \
 compile sntpclock.c strerr.h ip.h str.h byte.h substdio.h readwrite.h \
 scan.h leapsecs.h tai.h taia.h
 	./compile sntpclock.c
-
-socket.lib: \
-trylsock.c compile load
-	( ( ./compile trylsock.c && \
-	./load trylsock -lsocket -lnsl ) >/dev/null 2>&1 \
-	&& echo -lsocket -lnsl || exit 0 ) > socket.lib
-	rm -f trylsock.o trylsock
 
 str.a: \
 makelib str_len.o str_diff.o byte_diff.o byte_chr.o byte_copy.o \
@@ -389,10 +381,9 @@ compile taia_unpack.c taia.h tai.h
 	./compile taia_unpack.c
 
 taiclock: \
-load taiclock.o ip.o libtai.a strerr.a substdio.a error.a str.a fs.a \
-socket.lib
+load taiclock.o ip.o libtai.a strerr.a substdio.a error.a str.a fs.a
 	./load taiclock ip.o libtai.a strerr.a substdio.a error.a \
-	str.a fs.a  `cat socket.lib`
+	str.a fs.a
 
 taiclock.0: \
 taiclock.1
@@ -404,10 +395,9 @@ taia.h tai.h
 	./compile taiclock.c
 
 taiclockd: \
-load taiclockd.o libtai.a strerr.a substdio.a error.a str.a \
-socket.lib
+load taiclockd.o libtai.a strerr.a substdio.a error.a str.a
 	./load taiclockd libtai.a strerr.a substdio.a error.a \
-	str.a  `cat socket.lib`
+	str.a
 
 taiclockd.0: \
 taiclockd.1

@@ -78,7 +78,6 @@ open_write.c
 auto-str.c
 install.c
 instcheck.c
-trylsock.c
 leapsecs.dat
 leapsecs.3
 leapsecs.h
