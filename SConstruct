@@ -46,3 +46,7 @@ env.Program('sntpclock', ['sntpclock.c', 'ip.o'],
 env.Program('taiclock', ['taiclock.c', 'ip.o'],
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
+    
+env.Program('taiclockd', ['taiclockd.c'],
+    LIBS=['tai', 'strerr', 'substdio', 'error', 'str'],
+    LIBPATH='.')
