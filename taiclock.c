@@ -51,7 +51,7 @@ struct taia temp2;
 
 unsigned char adj[16];
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   struct timeval tvselect;
   fd_set rfds;
@@ -152,4 +152,5 @@ void main(int argc, char **argv)
   if (substdio_putflush(&ssout,adj,sizeof adj) == -1)
     strerr_die2sys(111,FATAL,"unable to write output: ");
   _exit(0);
+  return 0;
 }
