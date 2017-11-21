@@ -2,6 +2,5 @@ VERSION
 systype
 hasmkffo.h
 select.h
-uint64.h
 hasgethr.h
 hasrdtsc.h

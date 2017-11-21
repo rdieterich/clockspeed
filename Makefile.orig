@@ -180,7 +180,7 @@ man sntpclock taiclock taiclockd clockspeed clockadd clockview \
 install instcheck
 
 leapsecs_add.o: \
-compile leapsecs_add.c leapsecs.h tai.h uint64.h
+compile leapsecs_add.c leapsecs.h tai.h
 	./compile leapsecs_add.c
 
 leapsecs_init.o: \
@@ -188,7 +188,7 @@ compile leapsecs_init.c leapsecs.h
 	./compile leapsecs_init.c
 
 leapsecs_read.o: \
-compile leapsecs_read.c tai.h uint64.h leapsecs.h
+compile leapsecs_read.c tai.h leapsecs.h
 	./compile leapsecs_read.c
 
 libtai.a: \
@@ -276,7 +276,7 @@ auto-str.c install.c instcheck.c trylsock.c leapsecs.dat leapsecs.3 \
 leapsecs.h leapsecs_add.c leapsecs_init.c leapsecs_read.c tai.3 \
 tai_pack.3 tai.h tai_pack.c tai_unpack.c taia.3 taia_now.3 \
 taia_pack.3 taia.h taia_add.c taia_half.c taia_less.c taia_now.c \
-taia_pack.c taia_sub.c taia_unpack.c uint64.h1 uint64.h2 tryulong64.c \
+taia_pack.c taia_sub.c taia_unpack.c tryulong64.c \
 timing.h tryrdtsc.c trygethr.c
 	shar -m `cat FILES` > shar
 	chmod 400 shar
@@ -293,7 +293,7 @@ sntpclock.1
 
 sntpclock.o: \
 compile sntpclock.c strerr.h ip.h str.h byte.h substdio.h readwrite.h \
-select.h scan.h leapsecs.h tai.h uint64.h taia.h
+select.h scan.h leapsecs.h tai.h taia.h
 	./compile sntpclock.c
 
 socket.lib: \
@@ -359,39 +359,39 @@ find-systype trycpp.c
 	./find-systype > systype
 
 tai_pack.o: \
-compile tai_pack.c tai.h uint64.h
+compile tai_pack.c tai.h
 	./compile tai_pack.c
 
 tai_unpack.o: \
-compile tai_unpack.c tai.h uint64.h
+compile tai_unpack.c tai.h
 	./compile tai_unpack.c
 
 taia_add.o: \
-compile taia_add.c taia.h tai.h uint64.h
+compile taia_add.c taia.h tai.h
 	./compile taia_add.c
 
 taia_half.o: \
-compile taia_half.c taia.h tai.h uint64.h
+compile taia_half.c taia.h tai.h
 	./compile taia_half.c
 
 taia_less.o: \
-compile taia_less.c taia.h tai.h uint64.h
+compile taia_less.c taia.h tai.h
 	./compile taia_less.c
 
 taia_now.o: \
-compile taia_now.c taia.h tai.h uint64.h
+compile taia_now.c taia.h tai.h
 	./compile taia_now.c
 
 taia_pack.o: \
-compile taia_pack.c taia.h tai.h uint64.h
+compile taia_pack.c taia.h tai.h
 	./compile taia_pack.c
 
 taia_sub.o: \
-compile taia_sub.c taia.h tai.h uint64.h
+compile taia_sub.c taia.h tai.h
 	./compile taia_sub.c
 
 taia_unpack.o: \
-compile taia_unpack.c taia.h tai.h uint64.h
+compile taia_unpack.c taia.h tai.h
 	./compile taia_unpack.c
 
 taiclock: \
@@ -406,7 +406,7 @@ taiclock.1
 
 taiclock.o: \
 compile taiclock.c strerr.h ip.h str.h byte.h substdio.h readwrite.h \
-select.h taia.h tai.h uint64.h
+select.h taia.h tai.h
 	./compile taiclock.c
 
 taiclockd: \
@@ -420,12 +420,5 @@ taiclockd.1
 	nroff -man taiclockd.1 > taiclockd.0
 
 taiclockd.o: \
-compile taiclockd.c taia.h tai.h uint64.h byte.h strerr.h
+compile taiclockd.c taia.h tai.h byte.h strerr.h
 	./compile taiclockd.c
-
-uint64.h: \
-tryulong64.c compile load uint64.h1 uint64.h2
-	( ( ./compile tryulong64.c && ./load tryulong64 && \
-	./tryulong64 ) >/dev/null 2>&1 \
-	&& cat uint64.h1 || cat uint64.h2 ) > uint64.h
-	rm -f tryulong64.o tryulong64

@@ -6,7 +6,6 @@ load
 make-compile
 compile
 select.h
-uint64.h
 sntpclock.o
 ip.o
 make-makelib
