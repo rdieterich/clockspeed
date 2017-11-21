@@ -37,7 +37,12 @@ env.Library('tai', [
     'taia_now.c', 'taia_pack.c', 'taia_sub.c', 'taia_unpack.c',
     'leapsecs_add.c', 'leapsecs_init.c', 'leapsecs_read.c'])
 
-env.Program('sntpclock', ['sntpclock.c', 'ip.c'],
+env.Object('ip.c')
+
+env.Program('sntpclock', ['sntpclock.c', 'ip.o'],
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
-    
+
+env.Program('taiclock', ['taiclock.c', 'ip.o'],
+    LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
+    LIBPATH='.')
