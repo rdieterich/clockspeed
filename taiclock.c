@@ -4,12 +4,12 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <netinet/in.h>
+#include <unistd.h>
 #include "strerr.h"
 #include "ip.h"
 #include "str.h"
 #include "byte.h"
 #include "substdio.h"
-#include "readwrite.h"
 #include "taia.h"
 
 char outbuf[16];

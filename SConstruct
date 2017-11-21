@@ -33,16 +33,11 @@ env.Library('substdio', [
 ])
 
 env.Library('tai', [
-    'tai_pack.c', 
-    'tai_unpack.c', 
-    'taia_add.c', 
-    'taia_half.c', 
-    'taia_less.c', 
-    'taia_now.c', 
-    'taia_pack.c', 
-    'taia_sub.c', 
-    'taia_unpack.c', 
-    'leapsecs_add.c', 
-    'leapsecs_init.c', 
-    'leapsecs_read.c'
-])
+    'tai_pack.c', 'tai_unpack.c', 'taia_add.c', 'taia_half.c', 'taia_less.c',
+    'taia_now.c', 'taia_pack.c', 'taia_sub.c', 'taia_unpack.c',
+    'leapsecs_add.c', 'leapsecs_init.c', 'leapsecs_read.c'])
+
+env.Program('sntpclock.c',
+    LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
+    LIBPATH='.')
+    

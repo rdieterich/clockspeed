@@ -4,12 +4,12 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <netinet/in.h>
+#include <unistd.h>
 #include "strerr.h"
 #include "ip.h"
 #include "str.h"
 #include "byte.h"
 #include "substdio.h"
-#include "readwrite.h"
 #include "scan.h"
 #include "leapsecs.h"
 #include "tai.h"
@@ -114,7 +114,7 @@ struct taia temp2;
 
 unsigned char adj[16];
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   struct timeval tvselect;
   fd_set rfds;

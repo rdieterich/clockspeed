@@ -2,7 +2,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/select.h>
-#include "readwrite.h"
+#include <unistd.h>
 #include "exit.h"
 #include "scan.h"
 #include "fmt.h"
