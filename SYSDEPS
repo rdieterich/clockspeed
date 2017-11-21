@@ -1,6 +1,5 @@
 VERSION
 systype
 hasmkffo.h
-select.h
 hasgethr.h
 hasrdtsc.h

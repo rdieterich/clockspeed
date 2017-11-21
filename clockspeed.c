@@ -1,9 +1,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <sys/select.h>
 #include "readwrite.h"
 #include "exit.h"
-#include "select.h"
 #include "scan.h"
 #include "fmt.h"
 #include "str.h"

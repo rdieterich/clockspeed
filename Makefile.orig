@@ -60,7 +60,7 @@ clockadd.1
 	nroff -man clockadd.1 > clockadd.0
 
 clockadd.o: \
-compile clockadd.c substdio.h readwrite.h strerr.h exit.h select.h
+compile clockadd.c substdio.h readwrite.h strerr.h exit.h
 	./compile clockadd.c
 
 clockspeed: \
@@ -73,7 +73,7 @@ clockspeed.1
 	nroff -man clockspeed.1 > clockspeed.0
 
 clockspeed.o: \
-compile clockspeed.c readwrite.h exit.h select.h scan.h fmt.h str.h \
+compile clockspeed.c readwrite.h exit.h scan.h fmt.h str.h \
 open.h error.h auto_home.h timing.h hasrdtsc.h hasgethr.h
 	./compile clockspeed.c
 
@@ -249,12 +249,6 @@ scan_ulong.o: \
 compile scan_ulong.c scan.h
 	./compile scan_ulong.c
 
-select.h: \
-compile trysysel.c select.h1 select.h2
-	( ./compile trysysel.c >/dev/null 2>&1 \
-	&& cat select.h2 || cat select.h1 ) > select.h
-	rm -f trysysel.o trysysel
-
 setup: \
 it man install leapsecs.dat
 	./install
@@ -270,7 +264,7 @@ byte_copy.c byte_cr.c byte_zero.c str.h str_diff.c str_len.c strerr.h \
 strerr_sys.c strerr_die.c substdio.h substdio.c substdi.c substdo.c \
 substdio_copy.c subfd.h subfderr.c readwrite.h exit.h error.h error.c \
 error_str.c ip.h ip.c fmt.h fmt_str.c fmt_uint.c fmt_uint0.c \
-fmt_ulong.c scan.h scan_ulong.c select.h1 select.h2 trysysel.c \
+fmt_ulong.c scan.h scan_ulong.c \
 trymkffo.c open.h open_read.c open_trunc.c open_write.c \
 auto-str.c install.c instcheck.c trylsock.c leapsecs.dat leapsecs.3 \
 leapsecs.h leapsecs_add.c leapsecs_init.c leapsecs_read.c tai.3 \
@@ -293,7 +287,7 @@ sntpclock.1
 
 sntpclock.o: \
 compile sntpclock.c strerr.h ip.h str.h byte.h substdio.h readwrite.h \
-select.h scan.h leapsecs.h tai.h taia.h
+scan.h leapsecs.h tai.h taia.h
 	./compile sntpclock.c
 
 socket.lib: \
@@ -406,7 +400,7 @@ taiclock.1
 
 taiclock.o: \
 compile taiclock.c strerr.h ip.h str.h byte.h substdio.h readwrite.h \
-select.h taia.h tai.h
+taia.h tai.h
 	./compile taiclock.c
 
 taiclockd: \

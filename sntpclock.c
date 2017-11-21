@@ -2,6 +2,7 @@
 #include <sys/time.h>
 #include <sys/param.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <netinet/in.h>
 #include "strerr.h"
 #include "ip.h"
@@ -9,7 +10,6 @@
 #include "byte.h"
 #include "substdio.h"
 #include "readwrite.h"
-#include "select.h"
 #include "scan.h"
 #include "leapsecs.h"
 #include "tai.h"

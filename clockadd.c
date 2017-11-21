@@ -1,10 +1,10 @@
 #include <sys/types.h>
 #include <sys/time.h>
+#include <sys/select.h>
 #include "substdio.h"
 #include "readwrite.h"
 #include "strerr.h"
 #include "exit.h"
-#include "select.h"
 
 #define FATAL "clockadd: fatal: "
 
