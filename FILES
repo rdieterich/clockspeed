@@ -101,9 +101,6 @@ taia_now.c
 taia_pack.c
 taia_sub.c
 taia_unpack.c
-uint64.h1
-uint64.h2
-tryulong64.c
 timing.h
 tryrdtsc.c
 trygethr.c

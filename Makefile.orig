@@ -276,7 +276,7 @@ auto-str.c install.c instcheck.c trylsock.c leapsecs.dat leapsecs.3 \
 leapsecs.h leapsecs_add.c leapsecs_init.c leapsecs_read.c tai.3 \
 tai_pack.3 tai.h tai_pack.c tai_unpack.c taia.3 taia_now.3 \
 taia_pack.3 taia.h taia_add.c taia_half.c taia_less.c taia_now.c \
-taia_pack.c taia_sub.c taia_unpack.c tryulong64.c \
+taia_pack.c taia_sub.c taia_unpack.c \
 timing.h tryrdtsc.c trygethr.c
 	shar -m `cat FILES` > shar
 	chmod 400 shar
