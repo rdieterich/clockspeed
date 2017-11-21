@@ -39,6 +39,10 @@ env.Library('tai', [
 
 env.Object('ip.c')
 
+env.Program('clockview.c',
+    LIBS=['strerr', 'substdio', 'error', 'str', 'fs'],
+    LIBPATH='.')
+
 env.Program('sntpclock', ['sntpclock.c', 'ip.o'],
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
