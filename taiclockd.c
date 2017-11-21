@@ -15,10 +15,10 @@ int s;
 
 struct taia ta;
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   char *x;
-  int len;
+  socklen_t len;
   int r;
 
   s = socket(AF_INET,SOCK_DGRAM,0);
@@ -46,4 +46,5 @@ void main(int argc, char **argv)
 	  /* if it fails, bummer */
       }
   }
+  return 0;
 }
