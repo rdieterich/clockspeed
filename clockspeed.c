@@ -2,6 +2,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/select.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "exit.h"
 #include "scan.h"
@@ -120,7 +121,7 @@ void savederiv()
   rename("etc/atto.tmp","etc/atto"); /* if it fails, bummer */
 }
 
-void main(int argc, char *argv)
+int main(int argc, char *argv)
 {
   struct timeval tvselect;
   fd_set rfds;
@@ -206,4 +207,5 @@ void main(int argc, char *argv)
       adjtime(&tvchange,(struct timeval *) 0); /* if it fails, bummer */
     }
   }
+  return 0;
 }
