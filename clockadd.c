@@ -11,7 +11,7 @@
 unsigned char buf[16];
 struct timeval tv;
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   unsigned long u;
   unsigned long v;
@@ -55,4 +55,5 @@ void main(int argc, char **argv)
     strerr_die2sys(111,FATAL,"unable to settimeofday: ");
 
   _exit(0);
+  return 0;
 }
