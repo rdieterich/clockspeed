@@ -1,6 +1,6 @@
 # Setup build environment
 #env = Environment(CCFLAGS = '-O2 -std=c99 -D_POSIX_C_SOURCE=200809L -Wall')
-env = Environment(CCFLAGS = '-O2 -std=c99 -D_GNU_SOURCE -Wall -DHASRDTSC=1')
+env = Environment(CCFLAGS = '-O2 -std=c99 -D_GNU_SOURCE -Wall -DPOSIX_CLOCK=1')
 
 # Production rules for libraries
 env.Library('error', ['error.c', 'error_str.c'])

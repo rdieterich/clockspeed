@@ -15,9 +15,11 @@
 
 #ifndef HASRDTSC
 #ifndef HASGETHRTIME
+#ifndef POSIX_CLOCK
 
   Error! Need an unadjusted hardware clock.
 
+#endif
 #endif
 #endif
 
@@ -121,7 +123,7 @@ void savederiv()
   rename("etc/atto.tmp","etc/atto"); /* if it fails, bummer */
 }
 
-int main(int argc, char *argv)
+int main(int argc, char **argv)
 {
   struct timeval tvselect;
   fd_set rfds;
@@ -183,16 +185,16 @@ int main(int argc, char *argv)
 
     if (deriv) {
       now(&current);
-  
+
       deltalowlevel = timing_diff(&current.lowlevel,&first.lowlevel);
       deltareal = deltalowlevel * deriv;
       deltareal -= timing_basic_diff(&current.ostime,&first.ostime);
       deltareal += first.adj;
-  
+
       deltareal *= 0.001;
       if (deltareal > 99999999.0) deltareal = 99999999.0;
       if (deltareal < -99999999.0) deltareal = -99999999.0;
-  
+
       tvchange.tv_sec = 0;
       tvchange.tv_usec = deltareal;
       while (tvchange.tv_usec < 0) {
