@@ -1,5 +1,6 @@
 # Setup build environment
-env = Environment(CCFLAGS = '-O2 -std=c99 -D_POSIX_C_SOURCE=200809L -Wall')
+#env = Environment(CCFLAGS = '-O2 -std=c99 -D_POSIX_C_SOURCE=200809L -Wall')
+env = Environment(CCFLAGS = '-O2 -std=c99 -D_GNU_SOURCE -Wall')
 
 # Production rules for libraries
 env.Library('error', ['error.c', 'error_str.c'])
@@ -41,8 +42,13 @@ env.Library('tai', [
 
 # Production rules for objects
 env.Object('ip.c')
+env.Object('auto_home.c')
 
 # Production rules for programs
+env.Program('auto-str.c',
+    LIBS=['substdio', 'error', 'str'],
+    LIBPATH='.')
+
 env.Program('clockview.c',
     LIBS=['strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
@@ -61,4 +67,8 @@ env.Program('taiclockd.c',
 
 env.Program('clockadd.c',
     LIBS=['strerr', 'substdio', 'error', 'str'],
+    LIBPATH='.')
+
+env.Program(['clockspeed.c', 'auto_home.o'],
+    LIBS=['open', 'error', 'str', 'fs'],
     LIBPATH='.')

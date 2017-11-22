@@ -4,4 +4,7 @@
 sntpclock
 taiclock
 taiclockd
+clockadd
+clockspeed
 clockview
+auto-str
