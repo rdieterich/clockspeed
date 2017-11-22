@@ -1,5 +1,7 @@
+# Setup build environment
 env = Environment(CCFLAGS = '-O2 -std=c99 -D_POSIX_C_SOURCE=200809L -Wall')
 
+# Production rules for libraries
 env.Library('error', ['error.c', 'error_str.c'])
 
 env.Library('fs', [
@@ -37,20 +39,26 @@ env.Library('tai', [
     'taia_now.c', 'taia_pack.c', 'taia_sub.c', 'taia_unpack.c',
     'leapsecs_add.c', 'leapsecs_init.c', 'leapsecs_read.c'])
 
+# Production rules for objects
 env.Object('ip.c')
 
+# Production rules for programs
 env.Program('clockview.c',
     LIBS=['strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
 
-env.Program('sntpclock', ['sntpclock.c', 'ip.o'],
+env.Program(['sntpclock.c', 'ip.o'],
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
 
-env.Program('taiclock', ['taiclock.c', 'ip.o'],
+env.Program(['taiclock.c', 'ip.o'],
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str', 'fs'],
     LIBPATH='.')
     
-env.Program('taiclockd', ['taiclockd.c'],
+env.Program('taiclockd.c',
     LIBS=['tai', 'strerr', 'substdio', 'error', 'str'],
+    LIBPATH='.')
+
+env.Program('clockadd.c',
+    LIBS=['strerr', 'substdio', 'error', 'str'],
     LIBPATH='.')
