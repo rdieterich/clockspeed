@@ -1,9 +1,8 @@
-#include <sys/types.h>
-#include <sys/time.h>
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <netinet/in.h>
+#include <time.h>
 #include <unistd.h>
 #include "strerr.h"
 #include "ip.h"
@@ -116,13 +115,13 @@ unsigned char adj[16];
 
 int main(int argc, char **argv)
 {
-  struct timeval tvselect;
+  struct timespec tvselect;
   fd_set rfds;
   char *x;
   unsigned long u;
   int r;
   int loop;
-  struct timeval tvcookie;
+  struct timespec tvcookie;
   int flagleap;
 
   taia_unpack(initdeltamin,&deltamin);
@@ -154,28 +153,28 @@ int main(int argc, char **argv)
     byte_zero(query,sizeof query);
     query[0] = 27; /* client, NTP version 3 */
     query[2] = 8;
-  
-    gettimeofday(&tvcookie,(struct timezone *) 0);
+
+    clock_gettime(CLOCK_REALTIME, &tvcookie);
     u = tvcookie.tv_sec + NTP_OFFSET;
     query[43] = u; u >>= 8;
     query[42] = u; u >>= 8;
     query[41] = u; u >>= 8;
     query[40] = u;
-    u = tvcookie.tv_usec;
+    u = tvcookie.tv_nsec;
     query[45] = u; u >>= 8; /* deliberately inaccurate; this is a cookie */
     query[44] = u;
     u = getpid();
     query[47] = u; u >>= 8;
     query[46] = u;
-  
+
     taia_now(&ta0);
     if (sendto(s,query,sizeof query,0,(struct sockaddr *) &sa,sizeof sa) == -1)
       strerr_die2sys(111,FATAL,"unable to send request: ");
     FD_ZERO(&rfds);
     FD_SET(s,&rfds);
     tvselect.tv_sec = 1;
-    tvselect.tv_usec = 0;
-    if (select(s + 1,&rfds,(fd_set *) 0,(fd_set *) 0,&tvselect) != 1) {
+    tvselect.tv_nsec = 0;
+    if (pselect(s + 1,&rfds,(fd_set *) 0,(fd_set *) 0,&tvselect,NULL) != 1) {
       strerr_warn2(WARNING,"unable to read clock: timed out",0);
       continue;
     }
@@ -209,7 +208,7 @@ int main(int argc, char **argv)
 
     ntp_taia(response + 40,&taremote,flagleap);
     taia_add(&taremote,&taremote,&deltaoffset);
-  
+
     taia_add(&temp1,&deltamax,&ta1);
     taia_add(&temp2,&deltamin,&ta1);
     if (taia_less(&temp2,&taremote) && !taia_less(&temp1,&taremote)) {
