@@ -1,14 +1,13 @@
-#include <sys/types.h>
-#include <sys/time.h>
+#include <time.h>
 #include "taia.h"
 
 /* XXX: breaks tai encapsulation */
 
 void taia_now(struct taia *t)
 {
-  struct timeval now;
-  gettimeofday(&now,(struct timezone *) 0);
+  struct timespec now;
+  clock_gettime(CLOCK_REALTIME, &now);
   t->sec.x = 4611686018427387914ULL + (uint64_t) now.tv_sec;
-  t->nano = 1000 * now.tv_usec + 500;
+  t->nano = now.tv_nsec;
   t->atto = 0;
 }

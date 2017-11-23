@@ -1,5 +1,3 @@
-#include <sys/types.h>
-#include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
 #include "substdio.h"
@@ -41,7 +39,7 @@ void print()
 }
 
 unsigned char buf[16];
-struct timeval tv;
+struct timespec tv;
 
 int main(int argc, char **argv)
 {
@@ -50,9 +48,9 @@ int main(int argc, char **argv)
   if (read(0,buf,sizeof buf) != sizeof buf)
     strerr_die2x(111,FATAL,"data split across packets");
 
-  gettimeofday(&tv,(struct timezone *) 0);
+  clock_gettime(CLOCK_REALTIME, &tv);
   when = tv.tv_sec;
-  nano = tv.tv_usec * 1000;
+  nano = tv.tv_nsec;
   atto = 0;
   substdio_puts(&ssout,"before: ");
   print();
