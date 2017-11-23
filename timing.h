@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <time.h>
+#include <unistd.h>
 
 typedef struct timeval timing_basic;
 #define timing_basic_now(x) gettimeofday((x),(struct timezone *) 0)
@@ -11,11 +12,10 @@ typedef struct timeval timing_basic;
 
 #ifdef POSIX_CLOCK
 typedef struct timespec timing;
-#define timing_now(x) (clock_gettime(CLOCK_MONOTONIC, (x)))
 #define timing_diff(x,y) ((x)->tv_nsec - (double) (y)->tv_nsec + 1000000000.0 * ((x)->tv_sec - (double) (y)->tv_sec))
+#define timing_now(x) (clock_gettime(CLOCK_MONOTONIC_RAW, (x)))
 
 #elif HASRDTSC
-
 typedef struct { unsigned long t[2]; } timing;
 #define timing_now(x) asm volatile(".byte 15;.byte 49" : "=a"((x)->t[0]),"=d"((x)->t[1]))
 #define timing_diff(x,y) (((x)->t[0] - (double) (y)->t[0]) + 4294967296.0 * ((x)->t[1] - (double) (y)->t[1]))
