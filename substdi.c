@@ -2,7 +2,8 @@
 #include "byte.h"
 #include "error.h"
 
-static int oneread(int (*op)(), int fd, char *buf, int len)
+static int oneread(ssize_t (*op)(int,const void *,size_t),
+                   int fd, char *buf, int len)
 {
   int r;
 

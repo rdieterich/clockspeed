@@ -1,6 +1,7 @@
 #include "substdio.h"
 
-void substdio_fdbuf(substdio *s, int (*op)(), int fd, char *buf, int len)
+void substdio_fdbuf(substdio *s, ssize_t (*op)(int,const void *,size_t),
+                    int fd, char *buf, int len)
 {
   s->x = buf;
   s->fd = fd;
